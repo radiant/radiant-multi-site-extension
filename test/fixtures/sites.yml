@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  name: My site
+  domain: mysite.domain.com$
+  base_domain: mysite.domain.com
+  position: 1
+  homepage_id: 1
+two:
+  id: 2
+  name: Your site
+  domain: ^yoursite
+  base_domain: yoursite.test.com
+  position: 2
+  homepage_id:
+three:
+  id: 3
+  name: Default site
+  domain:
+  base_domain: digitalpulp.com
+  position: 4
+  homepage_id:
+subdomain:
+  id: 4
+  name: Subdomain
+  domain: ^sub\.
+  base_domain: sub.digitalpulp.com
+  position: 3
+  homepage_id:

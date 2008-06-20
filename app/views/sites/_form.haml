@@ -1,0 +1,23 @@
+.form-area
+  %p
+    %label{:for => "site_name"} Name
+    %br/
+    = f.text_field :name
+  %p
+    %label{:for => "site_domain"} Domain pattern
+    %br/
+    = f.text_field :domain
+  %p
+    %label{:for => "site_base_domain"} Base domain name
+    %br/
+    = f.text_field :base_domain
+  %p
+    %label{:for => "site_homepage_id"} Homepage ID
+    = f.text_field :homepage_id
+    %br/
+    - if f.object.new_record?
+      (A new homepage will automatically be created if not specified.)
+%p
+  = submit_tag "Save"
+  or
+  = link_to "cancel", sites_path

@@ -1,0 +1,20 @@
+%h1 Sites
+
+%table{:class => "index", :cellspacing => "0"}
+  %thead
+    %tr
+      %th Name
+      %th Domain match
+      %th Base domain
+      %th Modify
+      %th Order
+  %tbody
+    - @sites.each do |site|
+      %tr[site]
+        %td= link_to site.name, edit_site_path(site)
+        %td= h(site.domain)
+        %td= h(site.base_domain)
+        %td= link_to image("remove.png", :alt => "Remove"), object_path(site), :method => :delete
+        %td= order_links(site)
+%p
+  = link_to "New Site", new_site_path
