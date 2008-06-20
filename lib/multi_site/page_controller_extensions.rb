@@ -4,7 +4,7 @@ module MultiSite::PageControllerExtensions
       alias_method_chain :index, :root
       alias_method_chain :clear_model_cache, :site
       alias_method_chain :continue_url, :site
-      %w{remove clear_cache}.each do |m|
+      %w{remove}.each do |m|
         alias_method_chain m.to_sym, :back
       end
     }
@@ -39,16 +39,6 @@ module MultiSite::PageControllerExtensions
       end
     else
       session[:came_from] = request.env["HTTP_REFERER"]
-    end
-  end
-
-  def clear_cache_with_back
-    if request.post?
-      @cache.clear
-      announce_cache_cleared
-      redirect_to :back
-    else
-      render :text => 'Do not access this URL directly.'
     end
   end
   
