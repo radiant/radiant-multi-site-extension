@@ -1,4 +1,4 @@
-# Uncomment this if you reference any of your controllers in activate
+require_dependency 'application'
 
 class MultiSiteExtension < Radiant::Extension
   version "0.2"
