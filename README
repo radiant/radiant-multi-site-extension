@@ -19,8 +19,6 @@ Each site has its own independent sitemap/page-tree and these attributes:
 Included images are slightly modified from FamFamFam Silk Icons by Mark James:
 http://www.famfamfam.com/lab/icons/silk/
 
-*** THIS EXTENSION REQUIRES THE 'SHARDS' EXTENSION TO BE INSTALLED ***
-
 == Installation
 
 1) Unpack/checkout/export the extension into vendor/extensions of your 
@@ -35,6 +33,18 @@ http://www.famfamfam.com/lab/icons/silk/
   $ rake radiant:extensions:multi_site:update
 
 4) Restart your server
+
+== Other Extensions
+
+Multi Site allows you to customize routes within your other extensions. To
+restrict a route to a particular site, pass the site's name into the
+conditions hash:
+
+   map.resources :things, :conditions => { :site => 'My Site' }
+
+You can also scope a route to multiple sites with an array:
+
+   map.resources :things, :conditions => { :site => ['My Site', 'Your Site'] }
 
 == Acknowledgments
 
