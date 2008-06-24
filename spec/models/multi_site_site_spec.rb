@@ -54,8 +54,15 @@ describe Site do
   end
   
   it "should generate dev site url form path" do
-      sites(:mysite).dev_url.should eql("http://preview.mysite.domain.com/")
-      sites(:mysite).dev_url("/about").should eql("http://preview.mysite.domain.com/about")
+    sites(:mysite).dev_url.should eql("http://preview.mysite.domain.com/")
+    sites(:mysite).dev_url("/about").should eql("http://preview.mysite.domain.com/about")
+  end
+  
+  describe "#save" do
+    it "should reload routes" do
+      ActionController::Routing::Routes.should_receive(:reload)
+      @site.save
+    end
   end
 
 end

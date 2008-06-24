@@ -16,6 +16,7 @@ class Site < ActiveRecord::Base
   validates_uniqueness_of :domain
   
   after_create :create_homepage
+  after_save :reload_routes
   
   def url(path = "/")
     uri = URI.join("http://#{self.base_domain}", path)
@@ -35,5 +36,9 @@ class Site < ActiveRecord::Base
         self.homepage.parts << PagePart.new(:name => "body", :content => "")
         save
     end
+  end
+  
+  def reload_routes
+    ActionController::Routing::Routes.reload
   end
 end
