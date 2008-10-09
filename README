@@ -30,7 +30,7 @@ http://www.famfamfam.com/lab/icons/silk/
 
 3) Run the extension update task.
 
-  $ rake radiant:extensions:multi_site:update
+  $ rake production radiant:extensions:multi_site:update
 
 4) Restart your server
 
