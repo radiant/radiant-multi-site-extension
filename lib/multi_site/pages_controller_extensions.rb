@@ -1,4 +1,4 @@
-module MultiSite::PageControllerExtensions
+module MultiSite::PagesControllerExtensions
   def self.included(base)
     base.class_eval {
       alias_method_chain :index, :root
@@ -9,7 +9,7 @@ module MultiSite::PageControllerExtensions
       end
     }
   end
-  
+
   def index_with_root
     if params[:root] # If a root page is specified
       @homepage = Page.find(params[:root])
@@ -24,7 +24,7 @@ module MultiSite::PageControllerExtensions
       index_without_root
     end
   end
-    
+
   def remove_with_back
     @page = Page.find(params[:id])
     if request.post?
@@ -41,12 +41,12 @@ module MultiSite::PageControllerExtensions
       session[:came_from] = request.env["HTTP_REFERER"]
     end
   end
-  
+
   def clear_model_cache_with_site
     Page.current_site ||= @site || @page.root.site
     clear_model_cache_without_site
   end
-  
+
   def continue_url_with_site(options={})
     options[:redirect_to] || (params[:continue] ? page_edit_url(:id => model.id) : page_index_url(:root => model.root.id))
   end
