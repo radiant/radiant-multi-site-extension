@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 TestController = Class.new(ApplicationController)
 
 describe TestController, "for MultiSite routing" do
-  scenario :sites
+  dataset :sites
   
   before(:all) do
     ActionController::Routing::Routes.clear!

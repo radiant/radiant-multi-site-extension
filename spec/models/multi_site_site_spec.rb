@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Site do
-  scenario :sites
+  dataset :sites
   
   before do
     @site = Site.new :name => "Test Site", :domain => "test", :homepage_id => 1, :base_domain => "test.host", :homepage_id => page_id(:home)

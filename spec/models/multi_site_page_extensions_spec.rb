@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Page do
-  scenario :sites
+  dataset :sites
   
   before do
     @page = pages(:home)

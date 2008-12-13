@@ -1,4 +1,4 @@
-class SitesScenario < Scenario::Base
+class SitesDataset < Dataset::Base
   uses :pages
   
   def load
