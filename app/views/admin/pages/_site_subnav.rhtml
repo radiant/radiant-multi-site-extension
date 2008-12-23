@@ -17,7 +17,7 @@
 <div id="sites">
   <% Site.find(:all).each do |site| %>
     <% name = (@site == site) ? "<strong>#{site.name}</strong>" : site.name -%>
-    <%= link_to name, pages_path(:root => site.homepage) %>
+    <%= link_to name, admin_pages_path(:root => site.homepage) %>
   <% end %>
 </div>
 
@@ -28,14 +28,14 @@
       this.expandedRows = [];
       this.saveExpandedCookie();
       var id = row.id.split("-").last();
-      window.location = <%= page_index_url.to_json %> + "?root=" + id;
+      window.location = <%= admin_pages_path.to_json %> + "?root=" + id;
     };
   <% end %>
   <% if @homepage %>
   <p id="breadcrumbs">
   <% [@homepage, @homepage.ancestors].flatten.reverse.each do |page| %>
     <% unless page == @homepage %>
-      <%= link_to page.title, page_index_path(:root => page.id) %> &gt; 
+      <%= link_to page.title, admin_pages_path(:root => page.id) %> &gt; 
     <% else %>
       <em><%= page.title %></em>
     <% end %>
