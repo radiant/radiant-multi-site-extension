@@ -31,7 +31,7 @@ class Site < ActiveRecord::Base
   def create_homepage
     if self.homepage_id.blank?
         self.homepage = self.build_homepage(:title => "#{self.name} Homepage", 
-                           :slug => "#{self.name.slugify}", :breadcrumb => "Home", 
+                           :slug => "#{self.name.to_slug}", :breadcrumb => "Home", 
                            :status => Status[:draft])
         self.homepage.parts << PagePart.new(:name => "body", :content => "")
         save

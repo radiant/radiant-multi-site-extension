@@ -1,11 +1,11 @@
 require_dependency 'application'
 
 class MultiSiteExtension < Radiant::Extension
-  version "0.2"
+  version "0.3"
   description %{ Enables virtual sites to be created with associated domain names.
                  Also scopes the sitemap view to any given page (or the root of an
                  individual site). }
-  url "http://dev.radiantcms.org/svn/radiant/trunk/extensions/multi_site"
+  url "http://radiantcms.org/"
 
   define_routes do |map|
       map.resources :sites, :path_prefix => "/admin",
@@ -18,9 +18,6 @@ class MultiSiteExtension < Radiant::Extension
   end
 
   def activate
-    require 'slugify'
-    require_dependency 'application'
-
     Page.send :include, MultiSite::PageExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
