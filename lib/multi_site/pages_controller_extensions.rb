@@ -27,7 +27,7 @@ module MultiSite::PagesControllerExtensions
 
   def remove_with_back
     session[:came_from] = request.env["HTTP_REFERER"]
-    super
+    remove_without_back
   end
   
   def continue_url_with_site(options={})
