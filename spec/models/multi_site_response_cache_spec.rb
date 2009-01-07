@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ResponseCache do
-  scenario :sites
+  dataset :sites
   
   before do
     @cache = ResponseCache.new
