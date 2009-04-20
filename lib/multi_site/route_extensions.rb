@@ -17,3 +17,5 @@ module MultiSite
 
   end
 end
+
+ActionController::Routing::Route.send :include, MultiSite::RouteExtensions

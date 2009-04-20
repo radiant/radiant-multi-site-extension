@@ -18,12 +18,16 @@ class MultiSiteExtension < Radiant::Extension
   end
 
   def activate
+    # ActionController::Routing modules are required rather than sent as includes
+    # because the routing persists between dev. requests and is not compatible
+    # with multiple alias_method_chain calls.
+    require 'multi_site/route_extensions'
+    require 'multi_site/route_set_extensions'
     Page.send :include, MultiSite::PageExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
     ResponseCache.send :include, MultiSite::ResponseCacheExtensions
     Radiant::Config["dev.host"] = 'preview' if Radiant::Config.table_exists?
-    # Add site navigation
     admin.pages.index.add :top, "site_subnav"
     admin.tabs.add "Sites", "/admin/sites", :visibility => [:admin]
   end
