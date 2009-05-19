@@ -1,6 +1,7 @@
 class Site < ActiveRecord::Base
   acts_as_list
-  order_by "position ASC"
+  default_scope :order => 'position ASC'
+
   class << self
     def find_for_host(hostname = '')
       default, normal = find(:all).partition {|s| s.domain.blank? }
