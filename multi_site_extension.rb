@@ -1,7 +1,7 @@
-require_dependency 'application'
+require_dependency 'application_controller'
 
 class MultiSiteExtension < Radiant::Extension
-  version "0.3"
+  version "0.8.0"
   description %{ Enables virtual sites to be created with associated domain names.
                  Also scopes the sitemap view to any given page (or the root of an
                  individual site). }
@@ -26,14 +26,12 @@ class MultiSiteExtension < Radiant::Extension
     Page.send :include, MultiSite::PageExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
-    ResponseCache.send :include, MultiSite::ResponseCacheExtensions
     Radiant::Config["dev.host"] = 'preview' if Radiant::Config.table_exists?
     admin.pages.index.add :top, "site_subnav"
     admin.tabs.add "Sites", "/admin/sites", :visibility => [:admin]
   end
 
   def deactivate
-    admin.tabs.remove "Sites"
   end
 
 end
