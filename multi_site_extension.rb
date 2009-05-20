@@ -8,14 +8,16 @@ class MultiSiteExtension < Radiant::Extension
   url "http://radiantcms.org/"
 
   define_routes do |map|
-      map.resources :sites, :path_prefix => "/admin",
-                  :member => {
-                    :move_higher => :post,
-                    :move_lower => :post,
-                    :move_to_top => :put,
-                    :move_to_bottom => :put
-                  }
+    map.namespace :admin, :member => { :remove => :get } do |admin|
+      admin.resources :sites, :member => {
+        :move_higher => :post,
+        :move_lower => :post,
+        :move_to_top => :put,
+        :move_to_bottom => :put
+      }
+    end
   end
+
 
   def activate
     # ActionController::Routing modules are required rather than sent as includes
