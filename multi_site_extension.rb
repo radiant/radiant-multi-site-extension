@@ -28,7 +28,6 @@ class MultiSiteExtension < Radiant::Extension
     Page.send :include, MultiSite::PageExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
-    Radiant::Config["dev.host"] = 'preview' if Radiant::Config.table_exists?
     admin.pages.index.add :top, "site_subnav"
     admin.tabs.add "Sites", "/admin/sites", :visibility => [:admin]
   end
