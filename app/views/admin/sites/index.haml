@@ -11,10 +11,10 @@
   %tbody
     - @sites.each do |site|
       %tr[site]
-        %td= link_to site.name, edit_site_path(site)
+        %td= link_to site.name, edit_admin_site_path(site)
         %td= h(site.domain)
         %td= h(site.base_domain)
-        %td= link_to image("remove.png", :alt => "Remove"), site, :method => :delete, :confirm => "Are you sure you want to permanently remove #{site.name}?"
+        %td= link_to image("remove.png", :alt => "Remove"), admin_site_path(site), :method => :delete, :confirm => "Are you sure you want to permanently remove #{site.name}?"
         %td= order_links(site)
 %p
-  = link_to "New Site", new_site_path
+  = link_to "New Site", new_admin_site_path

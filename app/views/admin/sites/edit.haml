@@ -1,3 +1,3 @@
 %h1 Edit Site
-- form_for :site, @site, :url => site_path(@site), :html => {:method => :put} do |f|
+- form_for :site, @site, :url => admin_site_path(@site), :html => {:method => :put} do |f|
   = render :partial => "form", :locals => {:f => f}
