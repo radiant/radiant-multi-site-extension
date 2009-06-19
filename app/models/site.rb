@@ -32,9 +32,13 @@ class Site < ActiveRecord::Base
   def create_homepage
     if self.homepage_id.blank?
         self.homepage = self.build_homepage(:title => "#{self.name} Homepage", 
-                           :slug => "#{self.name.to_slug}", :breadcrumb => "Home", 
-                           :status => Status[:draft])
-        self.homepage.parts << PagePart.new(:name => "body", :content => "")
+                           :slug => "#{self.name.to_slug}", :breadcrumb => "Home")
+        default_status = Radiant::Config['defaults.page.status']
+        self.homepage.status = Status[default_status] if default_status
+        default_parts = Radiant::Config['defaults.page.parts'].to_s.strip.split(/\s*,\s*/)
+        default_parts.each do |name|
+          self.homepage.parts << PagePart.new(:name => name, :filter_id => Radiant::Config['defaults.page.filter'])
+        end
         save
     end
   end

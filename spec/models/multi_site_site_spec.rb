@@ -38,6 +38,23 @@ describe Site do
     @site.homepage.parts.each { |part| part.should be_valid }
     @site.homepage.should_not be_new_record
   end
+
+  it "should respect default page status" do
+    Radiant::Config['defaults.page.status'] = :published
+    site = Site.new :name => "Test Site", :domain => "test", :base_domain => "test.host"
+    site.save
+    site.homepage.should be_published
+  end
+
+  it "should respect default page parts" do
+    Radiant::Config['defaults.page.parts'] = 'body,footnotes,other'
+    site = Site.new :name => "Test Site", :domain => "test", :base_domain => "test.host"
+    site.save
+    site.homepage.parts.size.should == 3
+    %w(body footnotes other).each do |part|
+      site.homepage.part(part).should be_kind_of(PagePart)
+    end
+  end
   
   it "should find site for hostname" do
     sites(:mysite).should eql(Site.find_for_host("mysite.domain.com"))
