@@ -1,6 +1,6 @@
 module MultiSite::PagesControllerExtensions
   def self.included(base)
-    base.class_eval {
+    base.class_eval do
       alias_method_chain :index, :root
       alias_method_chain :continue_url, :site
       alias_method_chain :remove, :back
@@ -9,7 +9,7 @@ module MultiSite::PagesControllerExtensions
         session[:came_from] = nil
         redirect_to return_url || admin_pages_url(:root => model.root.id)
       end
-    }
+    end
   end
 
   def index_with_root
@@ -33,4 +33,5 @@ module MultiSite::PagesControllerExtensions
   def continue_url_with_site(options={})
     options[:redirect_to] || (params[:continue] ? edit_admin_page_url(model) : admin_pages_url(:root => model.root.id))
   end
+
 end

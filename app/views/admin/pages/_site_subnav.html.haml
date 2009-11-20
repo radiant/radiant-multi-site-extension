@@ -1,38 +1,23 @@
-- content_for :page_css do
-  :sass
-    #content
-      padding-top: 2.25em
-      position: relative
-    #sites 
-      position: absolute
-      top: 0
-      left: 0
-      font-size: 80%
-      line-height: 2em
-      padding-left: 1.5em
-      padding-top: 0.25em
-      a, a:visited
-        color: black
-        margin-right: 10px
-#sites
-  - Site.find(:all).each do |site|
-    - name = (@site == site) ? "<strong>#{site.name}</strong>" : site.name
-    = link_to name, admin_pages_path(:root => site.homepage)
+- content_for :page_scripts do
+  :plain
+    document.observe("dom:loaded", function(){
+      var site_form = $("multisite-navigation");
+      var site_select = $("multisite-select");
+      var site_form_action = $("multisite-submit");
+      if (!site_form || !site_select || !site_form_action) return;
+      console.log('foo');
+      site_form_action.hide();
+      site_select.observe("change", function(e, site_form){
+        site_form.submit();
+      }.bindAsEventListener(this, site_form));
+    });
 
-- if Radiant::Config['multi_site.scoped?']
-  - content_for :page_scripts do
-    :plain
-      SiteMap.prototype.toggleBranch = function(row, img) {
-        this.expandedRows = [];
-        this.saveExpandedCookie();
-        var id = row.id.split("-").last();
-        window.location = <%= admin_pages_path.to_json %> + "?root=" + id;
-      };
-  - if @homepage
-    %p#breadcrumbs
-      - [@homepage, @homepage.ancestors].flatten.reverse.each do |page|
-        - if page != @homepage
-          = link_to page.title, admin_pages_path(:root => page.id)
-          &gt;
-        - else
-          %em= page.title
+- if @homepage
+  #actions
+    - form_tag '/admin/pages', :id => 'multisite-navigation', :method => :get do
+      %ul
+        %li
+          %a
+            %label{:for => :root} View site: 
+            = select_tag :root, options_from_collection_for_select(Site.all, :homepage_id, :name, params[:root].to_i), :id => 'multisite-select'
+            = submit_tag 'Go', :id => "multisite-submit"

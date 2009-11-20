@@ -28,8 +28,8 @@ class MultiSiteExtension < Radiant::Extension
     Page.send :include, MultiSite::PageExtensions
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
-    admin.pages.index.add :top, "site_subnav"
-    admin.tabs.add "Sites", "/admin/sites", :visibility => [:admin]
+    admin.pages.index.add :bottom, "site_subnav"
+    admin.nav[:settings] << admin.nav_item("Sites", "Sites", "/admin/sites")
   end
 
   def deactivate

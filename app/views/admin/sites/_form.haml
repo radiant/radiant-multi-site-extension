@@ -1,23 +1,20 @@
-.form-area
+- form_for [:admin, @site] do |f|
   %p
-    %label{:for => "site_name"} Name
-    %br/
-    = f.text_field :name
+    = f.label :name
+    = f.text_field :name, :class => 'textbox'
   %p
-    %label{:for => "site_domain"} Domain pattern
-    %br/
-    = f.text_field :domain
+    %label{:for => "site_domain"} Domain match
+    = f.text_field :domain, :class => 'textbox'
   %p
-    %label{:for => "site_base_domain"} Base domain name
-    %br/
-    = f.text_field :base_domain
+    %label{:for => "site_base_domain"} Base domain
+    = f.text_field :base_domain, :class => 'textbox'
   %p
     %label{:for => "site_homepage_id"} Homepage ID
-    = f.text_field :homepage_id
-    %br/
+    = f.text_field :homepage_id, :class => 'textbox'
     - if f.object.new_record?
       (A new homepage will automatically be created if not specified.)
-%p
-  = submit_tag "Save"
-  or
-  = link_to "cancel", admin_sites_path
+  %p.buttons
+    = save_model_button(@site)
+    = save_model_and_continue_editing_button(@site)
+    or 
+    = link_to "Cancel", admin_sites_path
