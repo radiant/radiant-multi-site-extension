@@ -18,8 +18,8 @@
             %th Order
       %tbody
         - if @sites.empty?
-          %tr[site]
-            %td.note{:colspan => admin.site.index.site.length} No sites
+          %tr
+            %td.note{:colspan => admin.sites.index.header.length} No sites
         - @sites.each do |site|
           %tr[site]
             - render_region :row do |row|
