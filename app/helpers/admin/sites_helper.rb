@@ -1,4 +1,4 @@
-module SitesHelper
+module Admin::SitesHelper
   def order_links(site)
     returning String.new do |output|
       output << link_to(image("move_to_top.png", :alt => "Move to top"), move_to_top_admin_site_path(site), :method => :put)
