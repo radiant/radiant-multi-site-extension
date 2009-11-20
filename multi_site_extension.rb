@@ -20,9 +20,6 @@ class MultiSiteExtension < Radiant::Extension
 
 
   def activate
-    # ActionController::Routing modules are required rather than sent as includes
-    # because the routing persists between dev. requests and is not compatible
-    # with multiple alias_method_chain calls.
     require 'multi_site/route_extensions'
     require 'multi_site/route_set_extensions'
     Page.send :include, MultiSite::PageExtensions
