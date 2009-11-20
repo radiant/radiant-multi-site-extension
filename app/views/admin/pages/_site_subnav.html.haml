@@ -12,7 +12,7 @@
       }.bindAsEventListener(this, site_form));
     });
 
-- if @homepage
+- if @homepage and Site.count > 1
   #actions
     - form_tag '/admin/pages', :id => 'multisite-navigation', :method => :get do
       %ul
