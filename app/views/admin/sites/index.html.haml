@@ -1,22 +1,41 @@
 - @page_title = 'Sites - ' + default_page_title
 
 .outset
-  %table#users.index
+  = render_region :top
+  %table#sites.index
     %thead
       %tr
-        %th Name
-        %th Domain match
-        %th Base domain
-        %th Modify
-        %th Order
+        - render_region :header do |header|
+          - header.name_th do
+            %th Name
+          - header.match_th do
+            %th Domain match
+          - header.base_th do
+            %th Base domain
+          - header.modify_th do
+            %th Modify
+          - header.order_th do
+            %th Order
       %tbody
+        - if @sites.empty?
+          %tr[site]
+            %td.note{:colspan => admin.site.index.site.length} No sites
         - @sites.each do |site|
           %tr[site]
-            %td= link_to site.name, edit_admin_site_path(site)
-            %td= h(site.domain)
-            %td= h(site.base_domain)
-            %td= link_to image("remove.png", :alt => "Remove"), admin_site_path(site), :method => :delete, :confirm => "Are you sure you want to permanently remove #{site.name}?"
-            %td= order_links(site)
+            - render_region :row do |row|
+              - row.name_td do
+                %td= link_to site.name, edit_admin_site_path(site)
+              - row.match_td do
+                %td= h(site.domain)
+              - row.base_td do
+                %td= h(site.base_domain)
+              - row.modify_td do
+                %td= link_to image("remove.png", :alt => "Remove"), admin_site_path(site), :method => :delete, :confirm => "Are you sure you want to permanently remove #{site.name}?"
+              - row.order_td do
+                %td= order_links(site)
+
+  = render_region :bottom
+
 #actions
   %ul
     %li= link_to "New Site", new_admin_site_url

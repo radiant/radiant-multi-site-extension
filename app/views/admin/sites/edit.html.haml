@@ -1,4 +1,7 @@
 - body_classes << "reversed"
 
-%h1 Edit Site
-= render :partial => "form"
+- render_region :main do |main|
+  - main.edit_header do
+    %h1 Edit Site
+  - main.edit_form do
+    = render :partial => "form"
