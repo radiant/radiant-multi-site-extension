@@ -1,18 +1,18 @@
-- content_for :page_scripts do
-  :plain
-    document.observe("dom:loaded", function(){
-      var site_form = $("multisite-navigation");
-      var site_select = $("multisite-select");
-      var site_form_action = $("multisite-submit");
-      if (!site_form || !site_select || !site_form_action) return;
-      console.log('foo');
-      site_form_action.hide();
-      site_select.observe("change", function(e, site_form){
-        site_form.submit();
-      }.bindAsEventListener(this, site_form));
-    });
-
 - if @homepage and Site.count > 1
+  - content_for :page_scripts do
+    :plain
+      document.observe("dom:loaded", function(){
+        var site_form = $("multisite-navigation");
+        var site_select = $("multisite-select");
+        var site_form_action = $("multisite-submit");
+        if (!site_form || !site_select || !site_form_action) return;
+        console.log('foo');
+        site_form_action.hide();
+        site_select.observe("change", function(e, site_form){
+          site_form.submit();
+        }.bindAsEventListener(this, site_form));
+      });
+
   #actions
     - form_tag '/admin/pages', :id => 'multisite-navigation', :method => :get do
       %ul
