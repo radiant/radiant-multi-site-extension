@@ -1,7 +1,7 @@
 require_dependency 'application_controller'
 
 class MultiSiteExtension < Radiant::Extension
-  version "0.8.0"
+  version "0.9.0"
   description %{ Enables virtual sites to be created with associated domain names.
                  Also scopes the sitemap view to any given page (or the root of an
                  individual site). }
