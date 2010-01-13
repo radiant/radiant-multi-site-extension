@@ -25,8 +25,10 @@ class MultiSiteExtension < Radiant::Extension
     SiteController.send :include, MultiSite::SiteControllerExtensions
     Admin::PagesController.send :include, MultiSite::PagesControllerExtensions
     admin.pages.index.add :bottom, "site_subnav"
-    admin.nav[:settings] << admin.nav_item("Sites", "Sites", "/admin/sites")
-    @sites = load_default_regions
+    tab 'Settings' do |tab|
+      tab.add_item 'Sites', '/admin/sites'
+    end
+    load_default_regions
   end
 
   def deactivate
