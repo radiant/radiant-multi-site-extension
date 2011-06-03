@@ -1,4 +1,4 @@
-define_routes do |map|
+ActionController::Routing::Routes.draw do |map|
   map.namespace :admin, :member => { :remove => :get } do |admin|
     admin.resources :sites, :member => {
       :move_higher => :post,
