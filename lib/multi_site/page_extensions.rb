@@ -1,7 +1,7 @@
 module MultiSite::PageExtensions
   def self.included(base)
     base.class_eval {
-      alias_method_chain :url, :sites
+      alias_method_chain :path, :sites
       mattr_accessor :current_site
       has_one :site, :foreign_key => "homepage_id", :dependent => :nullify
     }
@@ -22,9 +22,9 @@ module MultiSite::PageExtensions
     end
   end
   
-  def url_with_sites
+  def path_with_sites
     if parent
-      parent.child_url(self)
+      parent.child_path(self)
     else
       "/"
     end
