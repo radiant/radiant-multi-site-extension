@@ -1,0 +1,47 @@
+# Multi Site
+
+[![Build Status](https://secure.travis-ci.org/radiant/radiant-multi-site-extension.png?branch=master)](http://travis-ci.org/radiant/radiant-multi-site-extension)
+
+Created by Sean Cribbs, November 2007. Inspired by the original virtual_domain behavior.
+
+Multi Site allows you to host multiple websites on a single Radiant installation.
+
+Each site has its own independent sitemap/page-tree and these attributes:
+
+  name: Whatever you want to call the site
+  domain: A Ruby regular expression (without the //) to match the request against
+  base_domain: A canonical domain name for doing quicker matches and for generating absolute URLs against
+  homepage_id: The numerical database ID of the root page (usually you can just leave this alone).
+
+Included images are slightly modified from FamFamFam Silk Icons by Mark James:
+http://www.famfamfam.com/lab/icons/silk/
+
+## Installation
+
+1. Unpack/checkout/export the extension into vendor/extensions of your project.
+
+2. Run the extension migrations.
+
+    $ rake production db:migrate:extensions
+
+3. Run the extension update task.
+
+    $ rake production radiant:extensions:multi_site:update
+
+4. Restart your server
+
+## Other Extensions
+
+Multi Site allows you to customize routes within your other extensions. To restrict a route to a particular site, pass the site's name into the conditions hash:
+
+    map.resources :things, :conditions => { :site => 'My Site' }
+
+You can also scope a route to multiple sites with an array:
+
+    map.resources :things, :conditions => { :site => ['My Site', 'Your Site'] }
+
+## Acknowledgments
+
+Thanks to Digital Pulp, Inc. for funding the initial development of this extension as part of the Redken.com project.
+
+Also, thanks to our contributors Josh French, Clinton R. Nixon, Nick Plante, Gert Goet, and Johannes Fahrenkrug.
