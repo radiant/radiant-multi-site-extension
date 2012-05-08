@@ -19,5 +19,5 @@
         %li
           %a
             %label{:for => :root} View site: 
-            = select_tag :root, options_from_collection_for_select(Site.all, :homepage_id, :name, params[:root].to_i), :id => 'multisite-select'
+            = select_tag :root, options_from_collection_for_select(Site.all, :homepage_id, :name, @homepage.id), :id => 'multisite-select'
             = submit_tag 'Go', :id => "multisite-submit"
